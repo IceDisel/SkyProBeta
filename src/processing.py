@@ -7,6 +7,7 @@ def get_dictionary_search(strings: list, state: str = "EXECUTED") -> list:
     :return: Возвращает новый список, содержащий только те словари,
      у которых ключ state содержит переданное в функцию значение.
     """
+
     list_of_found = [dict_ for dict_ in strings if dict_["state"] == state]
     return list_of_found
 

@@ -1,14 +1,15 @@
-from src.widget import convert_date, get_mask_bankcard_account
+from data.data import DATA_LIST
+from src.processing import dictionary_sorted, get_dictionary_search
 
 
-def main():
+def main() -> None:
     """Данный код для проверки"""
-    print(get_mask_bankcard_account("Visa Classic 6831982476737658"))
-    print(get_mask_bankcard_account("Maestro 1596837868705199"))
-    print(get_mask_bankcard_account("MasterCard 7158300734726758"))
-    print(get_mask_bankcard_account("Счет 35383033474447895560"))
 
-    print(convert_date("2018-07-11T02:26:18.671407"))
+    print(get_dictionary_search(DATA_LIST, "CANCELED"))
+    print(get_dictionary_search(DATA_LIST))
+    print()
+    print(dictionary_sorted(DATA_LIST, False))
+    [print(item) for item in dictionary_sorted(DATA_LIST)]
 
 
 if __name__ == "__main__":
