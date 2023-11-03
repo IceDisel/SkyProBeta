@@ -5,7 +5,7 @@ from src.masks import get_mask_the_bank_account, get_mask_the_bankcard
 
 def get_mask_bankcard_account(number_name: str) -> str:
     """
-    принимает на вход строку информацией тип карты/счета и номер карты/счета
+    Принимает на вход строку информацией тип карты/счета и номер карты/счета
     :return: возвращает эту строку с замаскированным номером карты/счета.
     """
 
@@ -21,7 +21,7 @@ def get_mask_bankcard_account(number_name: str) -> str:
 
 def convert_date(date_string: str) -> str:
     """
-    принимает на вход строку, вида "2018-07-11T02:26:18.671407"
+    Принимает на вход строку, вида "2018-07-11T02:26:18.671407"
     :return: возвращает строку с датой в виде "11.07.2018"
     """
 
