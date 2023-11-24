@@ -2,13 +2,18 @@ import json
 
 import pytest
 
-from data.data_for_test import TRANSACTIONS_FOR_TEST_2
-from src.utils import get_transaction_amount_rub, read_json_file
+from data.data_for_test import EXPECTED_RESULT, TRANSACTIONS_FOR_TEST_2
+from src.utils import get_transaction_amount_rub, read_csv_xlsx_file, read_json_file
 
 
 @pytest.fixture
 def tmp_path() -> str:
     return 'tests/test.json'
+
+
+@pytest.fixture()
+def expected_result() -> list:
+    return EXPECTED_RESULT
 
 
 def test_read_json_file_valid_file(tmp_path: str) -> None:
@@ -70,6 +75,46 @@ def test_read_json_file_invalid_encoding(tmp_path: str) -> None:
         json.dump(data, file)
 
     assert read_json_file(tmp_path) == []
+
+
+def test_read_csv_file(expected_result: list) -> None:
+    """
+    Тест для файла CSV с правильными данными.
+    :return: None
+    """
+    file_path = 'tests/test_data.csv'
+
+    assert read_csv_xlsx_file(file_path) == expected_result
+
+
+def test_read_xlsx_file(expected_result: list) -> None:
+    """
+    Тест для файла XLSX с правильными данными.
+    :return: None
+    """
+    file_path = 'tests/test_data.xlsx'
+
+    assert read_csv_xlsx_file(file_path) == expected_result
+
+
+def test_read_unsupported_file_format() -> None:
+    """
+    Тест для файла с неподдерживаемым форматом
+    :return: None
+    """
+    file_path = 'tests/test.json'
+
+    assert read_csv_xlsx_file(file_path) == []
+
+
+def test_read_file_with_invalid_data() -> None:
+    """
+    Тест для файла с неправильными данными.
+    :return: None
+    """
+    file_path = 'tests/test_data_1.csv'
+
+    assert read_csv_xlsx_file(file_path) == []
 
 
 @pytest.mark.parametrize("transaction", TRANSACTIONS_FOR_TEST_2)
