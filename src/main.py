@@ -1,26 +1,24 @@
-from src import log
-from src.settings import PATH_CSV, PATH_JSON, PATH_XLSX
-from src.utils import get_transaction_amount_rub, read_csv_xlsx_file, read_json_file
+from collections import Counter
 
-# from src.processing import dictionary_sorted, get_dictionary_search
+from src import log
+from src.bank_operations_utils import count_operations_by_category, search_operations
+from src.settings import PATH_CSV
+from src.utils import read_csv_xlsx_file
+
 logger = log.setup_logging()
 
 
 def main() -> None:
     """Данный код для проверки"""
 
-    print(read_json_file(PATH_JSON))
-    transaction = read_json_file(PATH_JSON)
-    print(get_transaction_amount_rub(transaction[0]))
-    print(transaction[0])
+    print(search_operations(read_csv_xlsx_file(PATH_CSV), "Перевод со счета на счет"))
 
-    print("=================-----------")
+    dict_categories = dict(Counter(item['description'] for item in read_csv_xlsx_file(PATH_CSV)).most_common())
 
-    print(read_csv_xlsx_file(PATH_CSV)[1])
+    for key in dict_categories:
+        dict_categories[key] = 0
 
-    print("======++++++++++===========")
-
-    print(read_csv_xlsx_file(PATH_XLSX)[998])
+    print(count_operations_by_category(read_csv_xlsx_file(PATH_CSV), dict_categories))
 
 
 if __name__ == "__main__":
