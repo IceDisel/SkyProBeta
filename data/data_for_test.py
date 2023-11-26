@@ -1,3 +1,5 @@
+from datetime import datetime
+
 TRANSACTIONS_FOR_TEST = (
     [
         {
@@ -192,4 +194,22 @@ TRANSACTIONS_FOR_TEST_2 = [
         "from": "MasterCard 7158300734726758",
         "to": "Счет 35383033474447895560"
     }
+]
+
+EXPECTED_RESULT = [
+    {
+        'id': 1,
+        'state': 'completed',
+        'date': datetime(2022, 1, 1, 10, 30, 32).strftime("%Y-%m-%dT%H:%M:%S.%f"),
+        'operationAmount': {
+            'amount': '{:.2f}'.format(float("100.00")),
+            'currency': {
+                'name': 'USD',
+                'code': 'USD'
+            }
+        },
+        'description': 'Payment',
+        'from': 'John',
+        'to': 'Alice'
+    },
 ]

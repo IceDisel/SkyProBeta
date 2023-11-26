@@ -1,0 +1,2 @@
+id;state;date;amount;currency_name;currency_code;from;to;description
+1;completed;2022-01-01T10:30:32Z;100.00;USD;USD;John;Alice;Payment
